@@ -48,10 +48,16 @@
 	 (theme (cdr (assoc :theme params)))
 	 (width (cdr (assoc :width params)))
 	 (height (cdr (assoc :height params)))
+	 (scale (cdr (assoc :scale params)))
 	 (background-color (cdr (assoc :background-color params)))
 	 (mermaid-config-file (cdr (assoc :mermaid-config-file params)))
 	 (css-file (cdr (assoc :css-file params)))
+<<<<<<< HEAD
 	 (puppeteer-config-file (cdr (assoc :puppeteer-config-file params)))
+=======
+	 (pupeteer-config-file (cdr (assoc :pupeteer-config-file params)))
+	 (pdf-fit (assoc :pdf-fit params))
+>>>>>>> 87bbe2c1091322e250ed63f54cf184afc62b07ca
          (temp-file (org-babel-temp-file "mermaid-"))
          (mmdc (or ob-mermaid-cli-path
                    (executable-find "mmdc")
@@ -67,6 +73,10 @@
 			(concat " -w " width))
 		      (when height
 			(concat " -H " height))
+		      (when scale
+			(concat " -s " (number-to-string scale)))
+		      (when pdf-fit
+			(concat " -f "))
 		      (when mermaid-config-file
 			(concat " -c " (org-babel-process-file-name mermaid-config-file)))
 		      (when css-file
